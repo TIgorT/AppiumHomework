@@ -38,28 +38,38 @@ public class UiAutomatorTest {
     @Test
     public void emptyString() {
         MainScreen mainScreen = new MainScreen(driver);
+        String expected = mainScreen.textToBeChanged.getText();
+        mainScreen.userInput.isDisplayed();
         mainScreen.userInput.click();
         mainScreen.userInput.sendKeys(" ");
+        mainScreen.buttonChange.isDisplayed();
         mainScreen.buttonChange.click();
-        Assertions.assertEquals("Hello UiAutomator!", mainScreen.textToBeChanged.getText());
+        String actual = mainScreen.textToBeChanged.getText();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void changingTheLabel() {
         MainScreen mainScreen = new MainScreen(driver);
+        mainScreen.userInput.isDisplayed();
         mainScreen.userInput.click();
         mainScreen.userInput.sendKeys("I'm really tired!");
+        mainScreen.buttonChange.isDisplayed();
         mainScreen.buttonChange.click();
-        Assertions.assertEquals("I'm really tired!", mainScreen.textToBeChanged.getText());
+        String actual = mainScreen.textToBeChanged.getText();
+        Assertions.assertEquals("I'm really tired!", actual);
     }
 
     @Test
     public void newTextInANewTab() {
         MainScreen mainScreen = new MainScreen(driver);
+        mainScreen.userInput.isDisplayed();
         mainScreen.userInput.click();
         mainScreen.userInput.sendKeys("It took half a day for the tests to work, it's hard!");
+        mainScreen.buttonActivity.isDisplayed();
         mainScreen.buttonActivity.click();
-        Assertions.assertEquals("It took half a day for the tests to work, it's hard!", mainScreen.text.getText());
+        String actual = mainScreen.text.getText();
+        Assertions.assertEquals("It took half a day for the tests to work, it's hard!", actual);
     }
 
     @AfterEach
